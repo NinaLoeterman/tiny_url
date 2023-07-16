@@ -4,11 +4,11 @@ import styles from "./page.module.css";
 
 export default function Home() {
   const [value, setValue] = useState<string>("");
-  
+
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();
     alert(value)
-    setValue('')
+    setValue('');
   };
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
