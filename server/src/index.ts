@@ -1,5 +1,7 @@
 import Fastify from "fastify";
 import cors from "@fastify/cors";
+import { getLongUrlController } from "./controllers/get-long-url.controller";
+import { shortenUrlController } from "./controllers/shorten.controller";
 
 const fastify = Fastify({
   logger: true,
@@ -7,18 +9,8 @@ const fastify = Fastify({
 
 fastify.register(cors);
 
-fastify.get("/", async (request, reply) => {
-  return { hello: "world" };
-});
-
-fastify.get("/long-url", async (request, reply) => {
-  return { hello: "world" };
-});
-
-fastify.post("/shorten", async (request: any) => {
-  console.log(request.body);
-  return { tinyURL: "imtiny.com" };
-});
+fastify.register(getLongUrlController);
+fastify.register(shortenUrlController);
 
 /**
  * Run the server!
