@@ -2,19 +2,19 @@
 import { ChangeEvent, FormEvent, useState } from "react";
 import styles from "./page.module.css";
 import {
-  useCreateTinyURL,
+  useShortenUrl,
   useFetchLongUrl,
 } from "@/lib/queries/long-url.queries";
 
 export default function Home() {
   const [value, setValue] = useState<string>("");
-  const createTinyURL = useCreateTinyURL();
+  const createTinyURL = useShortenUrl();
   const data = useFetchLongUrl();
 
   const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
     try {
-      const blah = await createTinyURL.mutateAsync({ longURL: value });
+      const blah = await createTinyURL.mutateAsync({ longUrl: value });
       console.log('hello', blah)
     } catch (e) {
       console.log("oops i failed", e);

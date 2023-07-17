@@ -11,7 +11,11 @@ fastify.get("/", async (request, reply) => {
   return { hello: "world" };
 });
 
-fastify.post("/long-url", async (request: any) => {
+fastify.get("/long-url", async (request, reply) => {
+  return { hello: "world" };
+});
+
+fastify.post("/shorten", async (request: any) => {
   console.log(request.body);
   return { tinyURL: "imtiny.com" };
 });
