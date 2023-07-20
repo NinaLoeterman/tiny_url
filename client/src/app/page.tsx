@@ -8,14 +8,16 @@ import {
 
 export default function Home() {
   const [value, setValue] = useState<string>("");
-  const createTinyURL = useShortenUrl();
+  const [shortUrl, setShortUrl] = useState<string>("");
+  const shortenUrl = useShortenUrl();
   const data = useFetchLongUrl();
 
   const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
     try {
-      const blah = await createTinyURL.mutateAsync({ longUrl: value });
-      console.log('hello', blah)
+      const shortened = await shortenUrl.mutateAsync({ longUrl: value });
+      setShortUrl(shortened.data.shortUrl)
+      console.log('response from ', shortened)
     } catch (e) {
       console.log("oops i failed", e);
     } finally {
@@ -32,6 +34,7 @@ export default function Home() {
         <input value={value} onChange={onChange} />
         <button type="submit">Shorten URL</button>
       </form>
+      <div>{shortUrl}</div>
     </main>
   );
 }
