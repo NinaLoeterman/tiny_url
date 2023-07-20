@@ -1,4 +1,5 @@
 import Fastify from "fastify";
+import dotenv from "dotenv";
 import "reflect-metadata";
 import cors from "@fastify/cors";
 import { getLongUrlController } from "./controllers/get-long-url.controller";
@@ -9,6 +10,7 @@ const fastify = Fastify({
   logger: true,
 });
 
+dotenv.config();
 fastify.register(cors);
 
 fastify.register(getLongUrlController);
