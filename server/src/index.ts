@@ -4,7 +4,7 @@ import "reflect-metadata";
 import cors from "@fastify/cors";
 import { getLongUrlController } from "./controllers/get-long-url.controller";
 import { shortenUrlController } from "./controllers/shorten.controller";
-import { AppDataSource } from "./data-source";
+import { connectionSource } from "../ormconfig";
 
 const fastify = Fastify({
   logger: true,
@@ -31,9 +31,9 @@ const start = async () => {
 start();
 
 const initDb = async () => {
-  if (AppDataSource.isInitialized) {
+  if (connectionSource.isInitialized) {
     console.log("DB is already initialized");
     return;
   }
-  await AppDataSource.initialize();
+  await connectionSource.initialize();
 };

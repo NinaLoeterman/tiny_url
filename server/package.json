@@ -16,7 +16,10 @@
   },
   "scripts": {
     "insert": "ts-node src/insert.ts",
-    "dev": "nodemon --exec ts-node src/index.ts"
+    "dev": "nodemon --exec ts-node src/index.ts",
+    "typeorm": "typeorm-ts-node-commonjs",
+    "migration:run": "typeorm migration:run -d ./ormconfig.ts",
+    "migration:generate": ""
   },
   "name": "server",
   "version": "1.0.0",

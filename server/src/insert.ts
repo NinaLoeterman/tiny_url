@@ -1,7 +1,7 @@
-import { AppDataSource } from "./data-source";
-import { User } from "./entity/User";
+import { connectionSource } from "../ormconfig";
+import { User } from "./entity/User.entity";
 
-AppDataSource.initialize()
+connectionSource.initialize()
   .then(async () => {
     console.log("Inserting a new user into the database...");
     const user = new User();
@@ -9,11 +9,11 @@ AppDataSource.initialize()
     user.lastName = "Lemon";
     user.age = 32;
     user.height = 75;
-    await AppDataSource.manager.save(user);
+    await connectionSource.manager.save(user);
     console.log("Saved a new user with id: " + user.id);
 
     console.log("Loading users from the database...");
-    const users = await AppDataSource.manager.find(User);
+    const users = await connectionSource.manager.find(User);
     console.log("Loaded users: ", users);
 
     console.log(

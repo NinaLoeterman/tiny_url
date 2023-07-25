@@ -1,6 +1,6 @@
 import { FastifyInstance } from "fastify";
-import { AppDataSource } from "../data-source";
-import { Url } from "../entity/Url";
+import { Url } from "../entity/Url.entity";
+import { connectionSource } from "../../ormconfig";
 
 export async function shortenUrlController(app: FastifyInstance) {
   app.post("/shorten", async (request: any) => {
@@ -9,7 +9,7 @@ export async function shortenUrlController(app: FastifyInstance) {
     url.shortUrl = shortUrl;
     url.longUrl = request.body.longUrl;
 
-    await AppDataSource.manager.save(url);
+    await connectionSource.manager.save(url);
     return { shortUrl };
   });
 }

@@ -1,8 +1,7 @@
-import "reflect-metadata";
 import { DataSource } from "typeorm";
-import { Url } from "./entity/Url";
 
-export const AppDataSource = new DataSource({
+export const connectionSource = new DataSource({
+  migrationsTableName: "migrations",
   type: "postgres",
   host: "localhost",
   port: 5432,
@@ -11,7 +10,7 @@ export const AppDataSource = new DataSource({
   database: process.env.PG_DB,
   synchronize: true,
   logging: false,
-  entities: [Url],
-  migrations: ["src/migration/*.ts"],
-  subscribers: ["src/entity/*.ts"],
+  entities: ["src/**/**.entity{.ts,.js}"],
+  migrations: ["src/migrations/**/*{.ts,.js}"],
+  subscribers: ["src/entity/**/*{.ts,.js}"],
 });
